@@ -1,0 +1,14 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+mybatis-plus:
+  # Mapper XML文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 配置实体类所在的包名，MyBatis-Plus会自动扫描并注册为别名
+  type-aliases-package: com/zjyz/pojo/entity
+  # 全局配置
+  global-config:
+    # 开启驼峰命名规则转换
+    capital-mode: true

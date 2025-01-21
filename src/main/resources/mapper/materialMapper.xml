@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//ES" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjyz.dao.MaterialMapper">
+
+
+    <select id="queryMaterialUnit" resultType="java.lang.String">
+        SELECT unit_name FROM zjyz.material_unit
+    </select>
+
+    <select id="queryMaterialCategory" resultType="java.lang.String">
+        SELECT category_name FROM zjyz.material_category
+    </select>
+
+
+</mapper>
