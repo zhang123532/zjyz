@@ -18,12 +18,13 @@ import com.zjyz.pojo.param.ret.RentInfoRet;
 import com.zjyz.service.CompensationDocumentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class CompensationDocumentServiceImpl implements CompensationDocumentService {
     @Autowired
     private CompensationDocumentMapper rentDocumentMapper;
