@@ -1,6 +1,7 @@
 package com.zjyz.controller;
 
 import com.zjyz.common.annotation.ZeeController;
+import com.zjyz.common.bean.RetBaseParam;
 import com.zjyz.pojo.param.req.CreateProjectParam;
 import com.zjyz.pojo.param.req.QueryProjectListParam;
 import com.zjyz.pojo.param.req.SaveProjectParam;
@@ -22,8 +23,9 @@ public class ProjectController {
     // 创建项目
     @PostMapping("/createProject")
     @ApiOperation(value = "创建项目")
-    public String createProject(@RequestBody CreateProjectParam createParam) {
-        return projectService.createProject(createParam);
+    public RetBaseParam createProject(@RequestBody CreateProjectParam createParam) {
+        String id= projectService.createProject(createParam);
+        return new RetBaseParam(id);
     }
 
     // 保存项目
