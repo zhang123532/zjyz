@@ -1,6 +1,7 @@
 package com.zjyz.controller;
 
 import com.zjyz.common.annotation.ZeeController;
+import com.zjyz.common.bean.RetBaseParam;
 import com.zjyz.pojo.param.req.SaveContractParam;
 import com.zjyz.pojo.param.ret.ContractInfoRet;
 import com.zjyz.service.ContractService;
@@ -18,8 +19,9 @@ public class ContractController {
     // 保存合同
     @PostMapping("/saveContract")
     @ApiOperation(value = "保存合同")
-    public String saveContract(@RequestBody SaveContractParam saveParam) {
-        return contractService.saveContract(saveParam);
+    public RetBaseParam saveContract(@RequestBody SaveContractParam saveParam) {
+        String id= contractService.saveContract(saveParam);
+        return new RetBaseParam(id);
     }
 
     // 查询合同信息

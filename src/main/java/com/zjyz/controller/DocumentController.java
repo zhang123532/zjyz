@@ -1,6 +1,7 @@
 package com.zjyz.controller;
 
 import com.zjyz.common.annotation.ZeeController;
+import com.zjyz.common.bean.RetBaseParam;
 import com.zjyz.pojo.param.req.*;
 import com.zjyz.pojo.param.ret.*;
 import com.zjyz.service.CompensationDocumentService;
@@ -29,8 +30,9 @@ public class DocumentController {
      */
     @PostMapping("/saveCompensationDocument")
     @ApiOperation(value = "保存补偿文档")
-    public String saveCompensationDocument(@RequestBody SaveCompensationDocumentParam param) {
-        return compensationDocumentService.saveCompensationDocument(param);
+    public RetBaseParam saveCompensationDocument(@RequestBody SaveCompensationDocumentParam param) {
+        String id = compensationDocumentService.saveCompensationDocument(param);
+        return new RetBaseParam(id);
     }
 
     /**
@@ -67,8 +69,9 @@ public class DocumentController {
      */
     @PostMapping("/saveRentDocument")
     @ApiOperation(value = "保存租赁文档")
-    public String saveRentDocument(@RequestBody SaveRentDocumentParam param) {
-        return rentDocumentService.saveRentDocument(param);
+    public RetBaseParam saveRentDocument(@RequestBody SaveRentDocumentParam param) {
+        String id = rentDocumentService.saveRentDocument(param);
+        return new RetBaseParam(id);
     }
 
     /**
@@ -96,8 +99,9 @@ public class DocumentController {
      */
     @PostMapping("/saveReturnDocument")
     @ApiOperation(value = "保存归还文档")
-    public String saveReturnDocument(@RequestBody SaveReturnDocumentParam param) {
-        return returnDocumentService.saveReturnDocument(param);
+    public RetBaseParam saveReturnDocument(@RequestBody SaveReturnDocumentParam param) {
+        String id = returnDocumentService.saveReturnDocument(param);
+        return new RetBaseParam(id);
     }
 
     /**
