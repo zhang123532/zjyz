@@ -20,7 +20,7 @@ public class ContractInfoRet {
     private String rentalStation;
     private String companyName;
     private String customerName;
-    private String taxRate;
+    private Double taxRate;
     private String operator;
     private String settlementUnit;
     private SettlementCycle settlementCycle;

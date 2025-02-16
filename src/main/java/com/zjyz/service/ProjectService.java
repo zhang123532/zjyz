@@ -14,4 +14,6 @@ public interface ProjectService {
     ProjectDetailInfoRet queryProjectInfo(String projectId);
 
     ProjectListRet queryProjectList(QueryProjectListParam queryParam);
+
+    boolean deleteProject(String projectId);
 }

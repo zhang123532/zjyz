@@ -1,6 +1,7 @@
 package com.zjyz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zjyz.common.exception.MyBizException;
 import com.zjyz.common.util.CommonUtil;
 import com.zjyz.dao.ContractMapper;
 import com.zjyz.dao.DocumentMaterialMapper;
@@ -35,6 +36,13 @@ public class ContractServiceImpl implements ContractService {
         QueryWrapper<ContractEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("project_id", saveParam.getProjectId());
         if (!StringUtils.hasText(saveParam.getContractId())) {
+            // 插入前检查当前 projectId 下是否存在合同
+            QueryWrapper<ContractEntity> checkWrapper = new QueryWrapper<>();
+            checkWrapper.eq("project_id", saveParam.getProjectId());
+            ContractEntity existingContract = contractMapper.selectOne(checkWrapper);
+            if (existingContract != null) {
+                throw new MyBizException("当前项目下已存在合同，请勿重复生成合同","CONT001");
+            }
             contractEntity.setContractId(CommonUtil.createUuid());
         }
         contractMapper.insertOrUpdate(contractEntity);
@@ -48,6 +56,9 @@ public class ContractServiceImpl implements ContractService {
         QueryWrapper<ContractEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("project_id", projectId);
         ContractEntity contractEntity = contractMapper.selectOne(queryWrapper);
+        if(contractEntity == null){
+            return null;
+        }
         List<DocumentMaterialEntity> materialEntityList = extractMethod.getMaterialListByDocumentId(contractEntity.getContractId());
         BeanUtils.copyProperties(contractEntity, ret);
         ret.setSettlementCycle(contractEntity.getHeadOrEnd(), contractEntity.getUpperLimitReminder(), contractEntity.getReconciliationPeriod(), contractEntity.getEnableExpandPeriodFlag());

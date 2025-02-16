@@ -10,7 +10,6 @@ public class DocumentMaterialEntity {
     @TableId
     private String materialId;
     private String documentId;
-    private String projectId;
     private Integer materialNumber;
     private String note;
     private String materialName;
@@ -18,5 +17,6 @@ public class DocumentMaterialEntity {
     private String materialType;
     private Double dailyRent;
     private Double monthlyRent;
+    //单据类型
     private String type;
 }

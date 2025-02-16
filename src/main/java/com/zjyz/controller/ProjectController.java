@@ -43,10 +43,15 @@ public class ProjectController {
     }
 
     // 查询项目列表
-    @PostMapping("/queryProjectList")
+    @GetMapping("/queryProjectList")
     @ApiOperation(value = "查询项目列表")
-    public ProjectListRet queryProjectList(@RequestBody QueryProjectListParam queryParam) {
+    public ProjectListRet queryProjectList(QueryProjectListParam queryParam) {
         return projectService.queryProjectList(queryParam);
+    }
+    @GetMapping("/deleteProject")
+    @ApiOperation(value = "删除项目")
+    public boolean deleteProject(@RequestParam String projectId) {
+        return projectService.deleteProject(projectId);
     }
 
 }

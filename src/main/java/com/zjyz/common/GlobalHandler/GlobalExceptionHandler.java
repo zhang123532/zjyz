@@ -30,4 +30,13 @@ public class GlobalExceptionHandler {
         ret.setErrorMessage(e.getErrorMessage());
         return  ret;
     }
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public RetBaseParam handleAllException(Exception e) {
+        RetBaseParam ret=new RetBaseParam();
+        ret.setReturnCode("UNKN001");
+        ret.setSucceed(false);
+        ret.setErrorMessage("发生未知错误"+e.getMessage());
+        return  ret;
+    }
 }

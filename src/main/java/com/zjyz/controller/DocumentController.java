@@ -47,9 +47,9 @@ public class DocumentController {
     /**
      * 查询补偿材料信息
      */
-    @PostMapping("/queryCompensationMaterialInfo")
+    @GetMapping("/queryCompensationMaterialInfo")
     @ApiOperation(value = "查询补偿材料信息")
-    public DocumentMaterialCompensationInfoRet queryCompensationMaterialInfo(@RequestBody QueryDocumentMaterialInfoParam queryParam) {
+    public DocumentMaterialCompensationInfoRet queryCompensationMaterialInfo(QueryDocumentMaterialInfoParam queryParam) {
         return compensationDocumentService.queryCompensationMaterialInfo(queryParam);
     }
 
@@ -58,9 +58,9 @@ public class DocumentController {
     /**
      * 查询文档列表
      */
-    @PostMapping("/queryDocumentList")
+    @GetMapping("/queryDocumentList")
     @ApiOperation(value = "查询文档列表")
-    public DocumentListInfoRet queryDocumentList(@RequestBody QueryDocumentListParam queryParam) {
+    public DocumentListInfoRet queryDocumentList(QueryDocumentListParam queryParam) {
         return rentDocumentService.queryDocumentList(queryParam);
     }
 
@@ -86,9 +86,9 @@ public class DocumentController {
     /**
      * 查询租赁材料信息
      */
-    @PostMapping("/queryRentMaterialInfo")
+    @GetMapping("/queryRentMaterialInfo")
     @ApiOperation(value = "查询租赁材料信息")
-    public DocumentMaterialActivityInfoRet queryRentMaterialInfo(@RequestBody QueryDocumentMaterialInfoParam queryParam) {
+    public DocumentMaterialActivityInfoRet queryRentMaterialInfo(QueryDocumentMaterialInfoParam queryParam) {
         return rentDocumentService.queryRentMaterialInfo(queryParam);
     }
 
@@ -116,9 +116,9 @@ public class DocumentController {
     /**
      * 查询归还材料信息
      */
-    @PostMapping("/queryReturnMaterialInfo")
+    @GetMapping("/queryReturnMaterialInfo")
     @ApiOperation(value = "查询归还材料信息")
-    public DocumentMaterialActivityInfoRet queryReturnMaterialInfo(@RequestBody QueryDocumentMaterialInfoParam queryParam) {
+    public DocumentMaterialActivityInfoRet queryReturnMaterialInfo(QueryDocumentMaterialInfoParam queryParam) {
         return returnDocumentService.queryReturnMaterialInfo(queryParam);
     }
 }

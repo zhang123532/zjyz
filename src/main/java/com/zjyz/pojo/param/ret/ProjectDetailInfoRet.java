@@ -8,12 +8,12 @@ import java.util.List;
 public class ProjectDetailInfoRet {
     private String projectId;
     private String managerName;
-    private String createTime;
+    private String createDate;
     private String partnerName;
     private String driver;
     private String escortVehicle;
     private String publishAndReceiver;
-    private Boolean projectStatusFlag;
+    private String projectStatusFlag;
     private Integer rentOutProgress;
     private Integer returnProgress;
     private SettlementCycle settlementCycle;

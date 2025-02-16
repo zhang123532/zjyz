@@ -19,7 +19,7 @@ public class ProjectEntity {
     private String partnerName;
     private String driver;
     private String escortVehicle;
-    private String pushAndReceiver;
+    private String publishAndReceiver;
     private String projectStatusFlag;
     private String createDate;
 }

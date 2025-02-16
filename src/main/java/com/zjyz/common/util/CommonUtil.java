@@ -27,7 +27,4 @@ public class CommonUtil {
         return dateTime.format(formatter);
     }
 
-    public static String getNowTime() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
 }

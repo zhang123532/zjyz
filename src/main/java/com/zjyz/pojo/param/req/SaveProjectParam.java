@@ -13,5 +13,6 @@ public class SaveProjectParam {
     private String driver;
     private String escortVehicle;
     private String publishAndReceiver;
-    private Boolean projectStatusFlag;
+    // 项目状态标识  0：进行中 1：已完成
+    private String projectStatusFlag;
 }
