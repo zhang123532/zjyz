@@ -22,12 +22,12 @@ import java.util.List;
 public enum QueryDocumentListStrategy {
     RENT_DOCUMENT(0) {
         @Override
-        public DocumentListInfoRet toDo(String documentId, int pageSize, int pageNum) {
+        public DocumentListInfoRet toDo(String projectId, int pageSize, int pageNum) {
             DocumentListInfoRet ret = new DocumentListInfoRet();
             RentDocumentMapper mapper = ApplicationBeanUtil.getBean(RentDocumentMapper.class);
             Page<RentDocumentEntity> page = new Page<>(pageNum, pageSize);
             QueryWrapper<RentDocumentEntity> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("document_id", documentId);
+            queryWrapper.eq("project_id", projectId);
             Page<RentDocumentEntity> pageResult = mapper.selectPage(page, queryWrapper);
             ret.setCurrent(pageResult.getCurrent());
             ret.setTotalNum(pageResult.getTotal());
@@ -38,6 +38,8 @@ public enum QueryDocumentListStrategy {
             pageResult.getRecords().forEach(s -> {
                 DocumentBriefInfo briefInfo = new DocumentBriefInfo();
                 BeanUtils.copyProperties(s, briefInfo);
+                briefInfo.setDocumentId(s.getRentDocumentId());
+                briefInfo.setDocumentName(s.getRentDocumentName());
                 briefInfos.add(briefInfo);
             });
             ret.setDocumentBriefInfoList(briefInfos);
@@ -46,12 +48,12 @@ public enum QueryDocumentListStrategy {
     },
     RETURN_DOCUMENT(1) {
         @Override
-        public DocumentListInfoRet toDo(String documentId, int pageSize, int pageNum) {
+        public DocumentListInfoRet toDo(String projectId, int pageSize, int pageNum) {
             DocumentListInfoRet ret = new DocumentListInfoRet();
             ReturnDocumentMapper mapper = ApplicationBeanUtil.getBean(ReturnDocumentMapper.class);
             Page<ReturnDocumentEntity> page = new Page<>(pageNum, pageSize);
             QueryWrapper<ReturnDocumentEntity> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("document_id", documentId);
+            queryWrapper.eq("project_id", projectId);
             Page<ReturnDocumentEntity> pageResult = mapper.selectPage(page, queryWrapper);
             ret.setCurrent(pageResult.getCurrent());
             ret.setTotalNum(pageResult.getTotal());
@@ -62,6 +64,8 @@ public enum QueryDocumentListStrategy {
             pageResult.getRecords().forEach(s -> {
                 DocumentBriefInfo briefInfo = new DocumentBriefInfo();
                 BeanUtils.copyProperties(s, briefInfo);
+                briefInfo.setDocumentId(s.getReturnDocumentId());
+                briefInfo.setDocumentName(s.getReturnDocumentName());
                 briefInfos.add(briefInfo);
             });
             ret.setDocumentBriefInfoList(briefInfos);
@@ -71,12 +75,12 @@ public enum QueryDocumentListStrategy {
     },
     COMPENSATION_DOCUMENT(2) {
         @Override
-        public DocumentListInfoRet toDo(String documentId, int pageSize, int pageNum) {
+        public DocumentListInfoRet toDo(String projectId, int pageSize, int pageNum) {
             DocumentListInfoRet ret = new DocumentListInfoRet();
             CompensationDocumentMapper mapper = ApplicationBeanUtil.getBean(CompensationDocumentMapper.class);
             Page<CompensationDocumentEntity> page = new Page<>(pageNum, pageSize);
             QueryWrapper<CompensationDocumentEntity> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("document_id", documentId);
+            queryWrapper.eq("project_id", projectId);
             Page<CompensationDocumentEntity> pageResult = mapper.selectPage(page, queryWrapper);
             ret.setCurrent(pageResult.getCurrent());
             ret.setTotalNum(pageResult.getTotal());
@@ -87,6 +91,8 @@ public enum QueryDocumentListStrategy {
             pageResult.getRecords().forEach(s -> {
                 DocumentBriefInfo briefInfo = new DocumentBriefInfo();
                 BeanUtils.copyProperties(s, briefInfo);
+                briefInfo.setDocumentId(s.getCompensationId());
+                briefInfo.setDocumentName(s.getCompensationDocumentName());
                 briefInfos.add(briefInfo);
             });
             ret.setDocumentBriefInfoList(briefInfos);
@@ -96,12 +102,12 @@ public enum QueryDocumentListStrategy {
     },
     STATEMENT_DOCUMENT(3) {
         @Override
-        public DocumentListInfoRet toDo(String documentId, int pageSize, int pageNum) {
+        public DocumentListInfoRet toDo(String projectId, int pageSize, int pageNum) {
             DocumentListInfoRet ret = new DocumentListInfoRet();
             StatementMapper mapper = ApplicationBeanUtil.getBean(StatementMapper.class);
             Page<StatementEntity> page = new Page<>(pageNum, pageSize);
             QueryWrapper<StatementEntity> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("document_id", documentId);
+            queryWrapper.eq("project_id", projectId);
             Page<StatementEntity> pageResult = mapper.selectPage(page, queryWrapper);
             ret.setCurrent(pageResult.getCurrent());
             ret.setTotalNum(pageResult.getTotal());
@@ -130,5 +136,5 @@ public enum QueryDocumentListStrategy {
         return strategyList.stream().filter(s -> s.type == type).findFirst().orElse(RENT_DOCUMENT);
     }
 
-    public abstract DocumentListInfoRet toDo(String documentId, int pageSize, int pageNum);
+    public abstract DocumentListInfoRet toDo(String projectId, int pageSize, int pageNum);
 }

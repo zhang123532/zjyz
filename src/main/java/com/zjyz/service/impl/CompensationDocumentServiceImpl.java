@@ -2,6 +2,7 @@ package com.zjyz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjyz.common.util.CommonUtil;
+import com.zjyz.common.util.TimeUtil;
 import com.zjyz.dao.CompensationDocumentMapper;
 import com.zjyz.dao.RentDocumentMapper;
 import com.zjyz.pojo.entity.CompensationDocumentEntity;
@@ -37,6 +38,7 @@ public class CompensationDocumentServiceImpl implements CompensationDocumentServ
         CompensationDocumentEntity compensationDocumentEntity = new CompensationDocumentEntity();
         if (!StringUtils.hasText(param.getCompensationDocumentId())) {
             param.setCompensationDocumentId(CommonUtil.createUuid());
+            compensationDocumentEntity.setCreateDate(TimeUtil.getNowDate());
         }
         BeanUtils.copyProperties(param, compensationDocumentEntity);
         rentDocumentMapper.insertOrUpdate(compensationDocumentEntity);

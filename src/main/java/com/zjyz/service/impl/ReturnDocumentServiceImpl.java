@@ -2,6 +2,7 @@ package com.zjyz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjyz.common.util.CommonUtil;
+import com.zjyz.common.util.TimeUtil;
 import com.zjyz.dao.ReturnDocumentMapper;
 import com.zjyz.pojo.entity.DocumentMaterialEntity;
 import com.zjyz.pojo.entity.ReturnDocumentEntity;
@@ -31,15 +32,16 @@ public class ReturnDocumentServiceImpl implements ReturnDocumentService {
 
     @Override
     public String saveReturnDocument(SaveReturnDocumentParam param) {
-        ReturnDocumentEntity rentDocumentEntity = new ReturnDocumentEntity();
+        ReturnDocumentEntity returnDocumentEntity = new ReturnDocumentEntity();
         if (!StringUtils.hasText(param.getReturnDocumentId())) {
             param.setReturnDocumentId(CommonUtil.createUuid());
+            returnDocumentEntity.setCreateDate(TimeUtil.getNowDate());
         }
-        BeanUtils.copyProperties(param, rentDocumentEntity);
-        returnDocumentMapper.insertOrUpdate(rentDocumentEntity);
-        extractMethod.saveExtraFile(param.getExtraFileList(), rentDocumentEntity.getReturnDocumentId());
-        extractMethod.saveIncidental(param.getIncidentalList(), rentDocumentEntity.getReturnDocumentId());
-        extractMethod.saveMaterial(param.getMaterialReturnInfoList(), rentDocumentEntity.getReturnDocumentId(), "2");
+        BeanUtils.copyProperties(param, returnDocumentEntity);
+        returnDocumentMapper.insertOrUpdate(returnDocumentEntity);
+        extractMethod.saveExtraFile(param.getExtraFileList(), returnDocumentEntity.getReturnDocumentId());
+        extractMethod.saveIncidental(param.getIncidentalList(), returnDocumentEntity.getReturnDocumentId());
+        extractMethod.saveMaterial(param.getMaterialReturnInfoList(), returnDocumentEntity.getReturnDocumentId(), "2");
         return param.getReturnDocumentId();
     }
 

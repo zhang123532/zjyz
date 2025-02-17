@@ -13,7 +13,7 @@ public class SaveReturnDocumentParam {
     private String customerName;
     private String returnDocumentName;
     private String returnDate;
-    private String rentStation;
+    private String rentalStation;
     private String personInCharge;
     private String auditor;
     private String note;

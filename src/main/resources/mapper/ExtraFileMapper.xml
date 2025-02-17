@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjyz.dao.ExtraFileMapper">
+    <insert id="insertOrUpdate">
+        INSERT INTO extra_file (extra_file_id, document_id, file_name, file_url)
+        VALUES (#{extraFileId}, #{documentId}, #{fileName}, #{fileUrl})
+        ON DUPLICATE KEY UPDATE
+        file_name = VALUES(file_name),
+        file_url = VALUES(file_url);
+    </insert>
+</mapper>

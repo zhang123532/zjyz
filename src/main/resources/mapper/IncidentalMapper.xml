@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjyz.dao.IncidentalMapper">
+    <insert id="insertOrUpdate">
+        INSERT INTO incidental (incidental_id, document_id, incidental_name, incidental_price, incidental_note)
+        VALUES (#{incidentalId}, #{documentId}, #{incidentalName}, #{incidentalPrice}, #{incidentalNote})
+        ON DUPLICATE KEY UPDATE
+        incidental_name = VALUES(incidental_name),
+        incidental_price = VALUES(incidental_price),
+        incidental_note = VALUES(incidental_note);
+    </insert>
+</mapper>

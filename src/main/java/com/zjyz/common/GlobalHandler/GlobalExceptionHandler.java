@@ -4,10 +4,12 @@ package com.zjyz.common.GlobalHandler;
 import com.zjyz.common.bean.RetBaseParam;
 import com.zjyz.common.exception.MyBizException;
 import com.zjyz.common.exception.MyDatabaseException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -37,6 +39,7 @@ public class GlobalExceptionHandler {
         ret.setReturnCode("UNKN001");
         ret.setSucceed(false);
         ret.setErrorMessage("发生未知错误"+e.getMessage());
+        log.error("e: ", e);
         return  ret;
     }
 }

@@ -3,6 +3,7 @@ package com.zjyz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjyz.common.enums.QueryDocumentListStrategy;
 import com.zjyz.common.util.CommonUtil;
+import com.zjyz.common.util.TimeUtil;
 import com.zjyz.dao.*;
 import com.zjyz.pojo.entity.DocumentMaterialEntity;
 import com.zjyz.pojo.entity.RentDocumentEntity;
@@ -34,7 +35,7 @@ public class RentDocumentServiceImpl implements RentDocumentService {
     @Override
     public DocumentListInfoRet queryDocumentList(QueryDocumentListParam queryParam) {
         QueryDocumentListStrategy strategy = QueryDocumentListStrategy.getStrategy(queryParam.getQueryType());
-        return strategy.toDo(queryParam.getDocumentId(), queryParam.getPageNum(), queryParam.getPageSize());
+        return strategy.toDo(queryParam.getProjectId(), queryParam.getPageSize(), queryParam.getPageNum());
     }
 
     @Override
@@ -42,6 +43,7 @@ public class RentDocumentServiceImpl implements RentDocumentService {
         RentDocumentEntity rentDocumentEntity = new RentDocumentEntity();
         if (!StringUtils.hasText(param.getRentDocumentId())) {
             param.setRentDocumentId(CommonUtil.createUuid());
+            rentDocumentEntity.setCreateDate(TimeUtil.getNowDate());
         }
         BeanUtils.copyProperties(param, rentDocumentEntity);
         rentDocumentMapper.insertOrUpdate(rentDocumentEntity);
