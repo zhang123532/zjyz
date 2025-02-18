@@ -49,7 +49,7 @@ public class RentDocumentServiceImpl implements RentDocumentService {
         rentDocumentMapper.insertOrUpdate(rentDocumentEntity);
         extractMethod.saveExtraFile(param.getExtraFileList(), rentDocumentEntity.getRentDocumentId());
         extractMethod.saveIncidental(param.getIncidentalList(), rentDocumentEntity.getRentDocumentId());
-        extractMethod.saveMaterial(param.getMaterialRentInfoList(), rentDocumentEntity.getRentDocumentId(), "1");
+        extractMethod.saveMaterial(param.getMaterialRentInfoList(), rentDocumentEntity.getRentDocumentId(), param.getProjectId(), "1");
         return param.getRentDocumentId();
     }
 
@@ -59,6 +59,9 @@ public class RentDocumentServiceImpl implements RentDocumentService {
         QueryWrapper<RentDocumentEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("rent_document_id", rentDocumentId);
         RentDocumentEntity rentDocumentEntity = rentDocumentMapper.selectOne(queryWrapper);
+        if (rentDocumentEntity == null) {
+            return rentInfoRet;
+        }
         BeanUtils.copyProperties(rentDocumentEntity, rentInfoRet);
         rentInfoRet.setMaterialRentInfoList( extractMethod.getMaterialListByDocumentId(rentDocumentId));
         rentInfoRet.setIncidentalList(extractMethod.getIncidentalListByDocumentId(rentDocumentId));

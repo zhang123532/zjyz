@@ -9,6 +9,7 @@ import lombok.Data;
 public class DocumentMaterialEntity {
     @TableId
     private String materialId;
+    private String projectId;
     private String documentId;
     private Integer materialNumber;
     private String note;

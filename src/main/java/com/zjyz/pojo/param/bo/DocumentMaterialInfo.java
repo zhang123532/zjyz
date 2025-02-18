@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class DocumentMaterialInfo {
     private String materialId;
-    private String compensationReason;
     private Integer materialNumber;
     private String note;
     private String materialName;

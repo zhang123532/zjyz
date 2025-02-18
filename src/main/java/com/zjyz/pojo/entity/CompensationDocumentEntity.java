@@ -9,7 +9,7 @@ import lombok.Data;
 public class CompensationDocumentEntity {
     // 主键 compensation_id
     @TableId
-    private String compensationId;
+    private String compensationDocumentId;
 
     private String projectId;
 

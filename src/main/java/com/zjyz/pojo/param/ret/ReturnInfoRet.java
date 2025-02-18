@@ -16,9 +16,8 @@ import java.util.List;
 public class ReturnInfoRet {
     private String returnDocumentId;
     private String projectId;
-    private String customerName;
     private String returnDocumentName;
-    private String returnTime;
+    private String returnDate;
     private String rentalStation;
     private String personInCharge;
     private String auditor;

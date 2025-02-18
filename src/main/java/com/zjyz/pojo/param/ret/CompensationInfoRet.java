@@ -17,10 +17,9 @@ import java.util.List;
 public class CompensationInfoRet {
     private String compensationDocumentId;
     private String projectId;
-    private String customerName;
     private String compensationDocumentName;
-    private String compensationTime;
-    private String rentalStationStation;
+    private String compensationDate;
+    private String rentalStation;
     private String personInCharge;
     private String auditor;
     private String note;

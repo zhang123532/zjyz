@@ -10,7 +10,6 @@ import java.util.List;
 public class SaveCompensationDocumentParam {
     private String compensationDocumentId;
     private String projectId;
-    private String customerName;
     private String compensationDocumentName;
     private String compensationDate;
     private String rentalStation;

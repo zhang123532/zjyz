@@ -46,7 +46,7 @@ public class ContractServiceImpl implements ContractService {
             contractEntity.setContractId(CommonUtil.createUuid());
         }
         contractMapper.insertOrUpdate(contractEntity);
-        extractMethod.saveMaterial(saveParam.getMaterialContractInfoList(), contractEntity.getContractId(), "0");
+        extractMethod.saveMaterial(saveParam.getMaterialContractInfoList(), contractEntity.getContractId(), saveParam.getProjectId(), "0");
         return contractEntity.getContractId();
     }
 

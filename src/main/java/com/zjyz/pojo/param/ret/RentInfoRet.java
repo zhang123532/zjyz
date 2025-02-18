@@ -17,9 +17,8 @@ import java.util.List;
 public class RentInfoRet {
     private String rentDocumentId;
     private String projectId;
-    private String customerName;
     private String rentDocumentName;
-    private String rentTime;
+    private String rentDate;
     private String rentalStation;
     private String personInCharge;
     private String auditor;

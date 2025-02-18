@@ -58,7 +58,7 @@ public class ExtractMethod {
         });
     }
 
-    public void saveMaterial(List<DocumentMaterialInfo> materialInfoList, String documentId, String type) {
+    public void saveMaterial(List<DocumentMaterialInfo> materialInfoList, String documentId,String projectId, String type) {
         if (CollectionUtils.isEmpty(materialInfoList)) {
             return;
         }
@@ -68,6 +68,7 @@ public class ExtractMethod {
                 s.setMaterialId(CommonUtil.createUuid());
             }
             BeanUtils.copyProperties(s, documentMaterialEntity);
+            documentMaterialEntity.setProjectId(projectId);
             documentMaterialEntity.setDocumentId(documentId);
             documentMaterialEntity.setType(type);
             documentMaterialMapper.insertOrUpdate(documentMaterialEntity);

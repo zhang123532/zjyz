@@ -41,7 +41,7 @@ public class ReturnDocumentServiceImpl implements ReturnDocumentService {
         returnDocumentMapper.insertOrUpdate(returnDocumentEntity);
         extractMethod.saveExtraFile(param.getExtraFileList(), returnDocumentEntity.getReturnDocumentId());
         extractMethod.saveIncidental(param.getIncidentalList(), returnDocumentEntity.getReturnDocumentId());
-        extractMethod.saveMaterial(param.getMaterialReturnInfoList(), returnDocumentEntity.getReturnDocumentId(), "2");
+        extractMethod.saveMaterial(param.getMaterialReturnInfoList(), returnDocumentEntity.getReturnDocumentId(), param.getProjectId(), "2");
         return param.getReturnDocumentId();
     }
 
@@ -49,7 +49,7 @@ public class ReturnDocumentServiceImpl implements ReturnDocumentService {
     public ReturnInfoRet queryReturnDocument(String returnDocumentId) {
         ReturnInfoRet returnInfoRet = new ReturnInfoRet();
         QueryWrapper<ReturnDocumentEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("rent_document_id", returnDocumentId);
+        queryWrapper.eq("return_document_id", returnDocumentId);
         ReturnDocumentEntity returnDocumentEntity = returnDocumentMapper.selectOne(queryWrapper);
         BeanUtils.copyProperties(returnDocumentEntity, returnInfoRet);
         returnInfoRet.setMaterialReturnInfoList(extractMethod.getMaterialListByDocumentId(returnDocumentId));

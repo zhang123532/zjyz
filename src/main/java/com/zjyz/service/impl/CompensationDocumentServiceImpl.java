@@ -4,18 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjyz.common.util.CommonUtil;
 import com.zjyz.common.util.TimeUtil;
 import com.zjyz.dao.CompensationDocumentMapper;
-import com.zjyz.dao.RentDocumentMapper;
 import com.zjyz.pojo.entity.CompensationDocumentEntity;
 import com.zjyz.pojo.entity.DocumentMaterialEntity;
-import com.zjyz.pojo.entity.RentDocumentEntity;
-import com.zjyz.pojo.param.bo.DocumentMaterialActivityInfo;
 import com.zjyz.pojo.param.bo.DocumentMaterialCompensationInfo;
 import com.zjyz.pojo.param.req.QueryDocumentMaterialInfoParam;
 import com.zjyz.pojo.param.req.SaveCompensationDocumentParam;
 import com.zjyz.pojo.param.ret.CompensationInfoRet;
-import com.zjyz.pojo.param.ret.DocumentMaterialActivityInfoRet;
 import com.zjyz.pojo.param.ret.DocumentMaterialCompensationInfoRet;
-import com.zjyz.pojo.param.ret.RentInfoRet;
 import com.zjyz.service.CompensationDocumentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +20,11 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
 public class CompensationDocumentServiceImpl implements CompensationDocumentService {
     @Autowired
-    private CompensationDocumentMapper rentDocumentMapper;
+    private CompensationDocumentMapper compensationDocumentMapper;
 
     @Autowired
     private ExtractMethod extractMethod;
@@ -41,10 +37,10 @@ public class CompensationDocumentServiceImpl implements CompensationDocumentServ
             compensationDocumentEntity.setCreateDate(TimeUtil.getNowDate());
         }
         BeanUtils.copyProperties(param, compensationDocumentEntity);
-        rentDocumentMapper.insertOrUpdate(compensationDocumentEntity);
-        extractMethod.saveExtraFile(param.getExtraFileList(), compensationDocumentEntity.getCompensationId());
-        extractMethod.saveIncidental(param.getIncidentalList(), compensationDocumentEntity.getCompensationId());
-        extractMethod.saveMaterial(param.getMaterialCompensationInfoList(), compensationDocumentEntity.getCompensationId(), "3");
+        compensationDocumentMapper.insertOrUpdate(compensationDocumentEntity);
+        extractMethod.saveExtraFile(param.getExtraFileList(), compensationDocumentEntity.getCompensationDocumentId());
+        extractMethod.saveIncidental(param.getIncidentalList(), compensationDocumentEntity.getCompensationDocumentId());
+        extractMethod.saveMaterial(param.getMaterialCompensationInfoList(), compensationDocumentEntity.getCompensationDocumentId(), param.getProjectId(), "3");
         return param.getCompensationDocumentId();
     }
 
@@ -52,8 +48,8 @@ public class CompensationDocumentServiceImpl implements CompensationDocumentServ
     public CompensationInfoRet queryCompensationDocument(String compensationDocumentId) {
         CompensationInfoRet compensationInfoRet = new CompensationInfoRet();
         QueryWrapper<CompensationDocumentEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("rent_document_id", compensationDocumentId);
-        CompensationDocumentEntity compensationDocumentEntity = rentDocumentMapper.selectOne(queryWrapper);
+        queryWrapper.eq("compensation_document_id", compensationDocumentId);
+        CompensationDocumentEntity compensationDocumentEntity = compensationDocumentMapper.selectOne(queryWrapper);
         BeanUtils.copyProperties(compensationDocumentEntity, compensationInfoRet);
         compensationInfoRet.setMaterialCompensationInfoInfoList(extractMethod.getMaterialListByDocumentId(compensationDocumentId));
         compensationInfoRet.setIncidentalList(extractMethod.getIncidentalListByDocumentId(compensationDocumentId));

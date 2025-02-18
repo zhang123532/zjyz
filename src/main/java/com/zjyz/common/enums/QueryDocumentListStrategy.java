@@ -91,7 +91,7 @@ public enum QueryDocumentListStrategy {
             pageResult.getRecords().forEach(s -> {
                 DocumentBriefInfo briefInfo = new DocumentBriefInfo();
                 BeanUtils.copyProperties(s, briefInfo);
-                briefInfo.setDocumentId(s.getCompensationId());
+                briefInfo.setDocumentId(s.getCompensationDocumentId());
                 briefInfo.setDocumentName(s.getCompensationDocumentName());
                 briefInfos.add(briefInfo);
             });
