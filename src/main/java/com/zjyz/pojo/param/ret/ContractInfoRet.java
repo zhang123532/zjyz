@@ -27,7 +27,7 @@ public class ContractInfoRet {
     private List<DocumentMaterialInfo> materialInfoList;
 
 
-    public void setSettlementCycle(int headOrEnd, int upperLimitReminder, int reconciliationPeriod, boolean enableExpandPeriodFlag) {
+    public void setSettlementCycle(Integer headOrEnd, Integer upperLimitReminder, Integer reconciliationPeriod, Boolean enableExpandPeriodFlag) {
         this.settlementCycle = new SettlementCycle(headOrEnd, upperLimitReminder, reconciliationPeriod, enableExpandPeriodFlag);
     }
 

@@ -7,4 +7,5 @@ public class DocumentBriefInfo {
     private String documentId;
     private String documentName;
     private String createDate;
+    private String personInCharge;
 }

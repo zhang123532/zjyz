@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @ZeeController
 @RequestMapping("/document")
 @Api(tags = "单据管理")
@@ -30,7 +32,7 @@ public class DocumentController {
      */
     @PostMapping("/saveCompensationDocument")
     @ApiOperation(value = "保存补偿文档")
-    public RetBaseParam saveCompensationDocument(@RequestBody SaveCompensationDocumentParam param) {
+    public RetBaseParam saveCompensationDocument(@Valid @RequestBody SaveCompensationDocumentParam param) {
         String id = compensationDocumentService.saveCompensationDocument(param);
         return new RetBaseParam(id);
     }
@@ -69,7 +71,7 @@ public class DocumentController {
      */
     @PostMapping("/saveRentDocument")
     @ApiOperation(value = "保存租赁文档")
-    public RetBaseParam saveRentDocument(@RequestBody SaveRentDocumentParam param) {
+    public RetBaseParam saveRentDocument(@Valid @RequestBody SaveRentDocumentParam param) {
         String id = rentDocumentService.saveRentDocument(param);
         return new RetBaseParam(id);
     }
@@ -99,7 +101,7 @@ public class DocumentController {
      */
     @PostMapping("/saveReturnDocument")
     @ApiOperation(value = "保存归还文档")
-    public RetBaseParam saveReturnDocument(@RequestBody SaveReturnDocumentParam param) {
+    public RetBaseParam saveReturnDocument(@Valid @RequestBody SaveReturnDocumentParam param) {
         String id = returnDocumentService.saveReturnDocument(param);
         return new RetBaseParam(id);
     }
